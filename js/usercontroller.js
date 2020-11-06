@@ -14,6 +14,25 @@ $().ready(() =>
             })       
     }
 
+
+    const displayUserById = () =>
+    {
+        let userId = $("#userId").val();
+        console.log(userId);
+        $.getJSON(`${baseurl}/users/${userId}`)
+            .done(u =>
+            {
+                $("#firstName").val(u.firstName);
+                $("#lastName").val(u.lastName);
+                $("#username").val(u.username);
+                $("#password").val("****");
+                $("#email").val(u.email);
+                $("#phoneNumber").val(u.phoneNumber);
+                $("#admin").val(u.admin);
+                $("#reviewer").val(u.reviewer);
+            })
+    }
+
     const display = (users) =>
     {
         let tbody = $("tbody");
@@ -36,5 +55,9 @@ $().ready(() =>
         }  
     }
 
-    getAll();
+    $("#userIdButton").on("click", () =>
+    {
+        displayUserById();
+    })
+ //   getAll();
 });
